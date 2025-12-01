@@ -15,6 +15,7 @@ fn rotate_dial(position: i32, instruction: String) -> i32 {
 fn main() {
     println!("Hello, world!");
     let mut dial_position: i32 = 50;
+    let mut counter: i32 = 0;
     loop {
         let mut instruction = String::new();
         io::stdin()
@@ -29,5 +30,11 @@ fn main() {
             dial_position = rotate_dial(dial_position, String::from(instruction));
             println!("{dial_position}");
         }
+
+        if dial_position == 0 {
+            counter += 1;
+            println!("Counter: {counter}");
+        }
     }
+    println!("Counter: {counter}");
 }

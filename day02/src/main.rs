@@ -1,7 +1,10 @@
+use regex::Regex;
 use std::io;
 use std::io::Read;
 
 fn main() {
+    let re = Regex::new(r"^(\d+)+$").unwrap();
+
     let mut stdin = io::stdin();
     let mut contents = String::new();
     stdin
@@ -18,12 +21,9 @@ fn main() {
             for num in start..=end {
                 let n_digits = num.ilog10() + 1;
                 let num_str = num.to_string();
-                if n_digits % 2 == 0 {
-                    println!("Even {num} {n_digits}");
-                    if &num_str[0..n_digits as usize / 2] == &num_str[n_digits as usize / 2..] {
-                        count += num;
-                        println!("MATCH {num} number {count}");
-                    }
+                if let Some(caps) = re.captures(&num_str) {
+                    count += num;
+                    println!("MATCH {num} [tally: {count}] {}", &caps[0]);
                 } else {
                     println!("Odd {num} {n_digits}")
                 }

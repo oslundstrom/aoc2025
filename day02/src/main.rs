@@ -64,7 +64,7 @@ fn main() {
         }
     }
     println!(
-        "\r{} {}                                         ",
+        "\r{} {}                                                              ",
         "RESULT:".bright_red(),
         count.to_string().bright_red()
     )
